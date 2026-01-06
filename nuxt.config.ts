@@ -13,4 +13,6 @@ export default defineNuxtConfig({
       apiBase: process.env.NUXT_PUBLIC_API_BASE || 'https://api.mvmc.work'
     }
   },
+
+  modules: ['@nuxt/fonts'],
 })
