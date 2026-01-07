@@ -9,7 +9,7 @@
         ></div>
 
         <NuxtLink
-            :to="{ name: 'favorite' }"
+            :to="{ name: 'favorites' }"
             class="nav-link">
           <IconHeart/>
         </NuxtLink>
@@ -41,7 +41,7 @@ const route = useRoute()
 const containerRef = ref(null)
 
 const routeIndexMap = {
-  'favorite': 0,
+  'favorites': 0,
   'index': 1,
   'profile': 2,
 }
@@ -52,7 +52,7 @@ console.log(routeIndexMap)
 
 const indicatorStyle = computed(() => {
   const positions = [
-    { left: '12px' }, // favorite
+    { left: '12px' }, // favorites
     { left: 'calc(50% - 50px)' }, // index
     { left: 'calc(100% - 112px)' }, // profile
   ]
