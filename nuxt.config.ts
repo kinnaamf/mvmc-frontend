@@ -15,4 +15,6 @@ export default defineNuxtConfig({
   },
 
   modules: ['@nuxt/fonts', '@nuxtjs/tailwindcss'],
+
+  css: ['@/assets/pcss/main.pcss'],
 })
