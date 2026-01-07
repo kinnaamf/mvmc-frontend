@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-center">
     <div class="mvmc-logo">
       <span>M</span><span>V</span><span>M</span><span>C</span>
     </div>

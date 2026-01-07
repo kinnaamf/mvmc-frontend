@@ -1,6 +1,24 @@
 <template>
-  <Body class="min-h-screen bg-[#030303] px-6">
-    <NuxtPage/>
-    <AppNavbar/>
-  </Body>
+
+  <div>
+    <header class="mt-8">
+      <AppLogo class="text-white"/>
+    </header>
+
+    <main>
+      <NuxtPage/>
+    </main>
+
+    <footer>
+      <AppNavbar/>
+    </footer>
+  </div>
+
 </template>
+<script setup lang="ts">
+useHead({
+  bodyAttrs: {
+    class: 'bg-[#030303] px-6 min-h-screen'
+  }
+})
+</script>

@@ -1,11 +1,10 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
-
+  <NuxtLayout name="tabs"></NuxtLayout>
 </template>
 
-<style scoped lang="postcss">
-
-</style>
+<script setup lang="ts">
+provide('tabs', [
+  { label: 'Подписки', to: '/favorites' },
+  { label: 'Товары', to: '/favorites/items' }
+])
+</script>
