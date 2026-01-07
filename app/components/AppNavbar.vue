@@ -1,10 +1,10 @@
 <template>
-  <nav class="mb-4 px-4">
+  <nav class="mb-4 px-4 nav">
     <div class="nav-wrapper backdrop-blur-sm">
-      <ul class="relative flex items-center justify-between py-3 px-3 shadow-xl w-full rounded-full bg-neutral-900">
+      <ul class="relative flex items-center justify-between py-3 px-3 shadow-xl w-full rounded-full">
 
         <div
-            class="absolute backdrop-blur-lg bg-white/40 shadow-lg rounded-full transition-all duration-300 ease-in-out border border-white/50"
+            class="absolute backdrop-blur-lg bg-white/30 shadow-lg rounded-full transition-all duration-300 ease-in-out"
             :style="indicatorStyle"
         ></div>
 
@@ -75,6 +75,12 @@ const indicatorStyle = computed(() => {
   rgba(255, 255, 255, 0.2) 75%,
   rgba(0, 0, 0, 1) 100%
   );
+}
+
+ul {
+  @apply bg-black/80;
+  box-shadow: 0 0 30px 1px rgba(0,0,0,0.25) inset;
+
 }
 
 .nav-link {
