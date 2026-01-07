@@ -1,11 +1,9 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
-
+  {{ $route.path }}
 </template>
 
-<style scoped lang="postcss">
-
-</style>
+<script setup lang="ts">
+definePageMeta({
+  layout: 'tabs'
+})
+</script>

@@ -1,20 +1,21 @@
 <template>
-
   <div>
     <header class="mt-8">
       <AppLogo class="text-white"/>
     </header>
 
     <main>
-      <NuxtPage/>
+      <NuxtLayout>
+        <NuxtPage/>
+      </NuxtLayout>
     </main>
 
     <footer>
       <AppNavbar/>
     </footer>
   </div>
-
 </template>
+
 <script setup lang="ts">
 useHead({
   bodyAttrs: {

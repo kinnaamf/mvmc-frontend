@@ -1,10 +1,11 @@
 <template>
-  <NuxtLayout name="tabs"></NuxtLayout>
+
 </template>
 
 <script setup lang="ts">
-provide('tabs', [
-  { label: 'Подписки', to: '/favorites' },
-  { label: 'Товары', to: '/favorites/items' }
-])
+definePageMeta({
+  middleware: defineNuxtRouteMiddleware(() => {
+    return navigateTo('/favorites/subscriptions')
+  })
+})
 </script>

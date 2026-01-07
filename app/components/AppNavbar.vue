@@ -1,138 +1,112 @@
 <template>
-  <nav class="mb-4 px-4 nav">
-    <div class="nav-wrapper backdrop-blur-sm">
-      <ul ref="navRef" class="relative flex items-center justify-between py-3 px-3 shadow-xl w-full rounded-full">
-
+  <nav class="fixed bottom-0 left-0 right-0 px-6 mb-4">
+    <div class="relative backdrop-blur-sm nav-wrapper">
+      <ul class="flex justify-between relative rounded-full py-3 px-3">
+        <!-- Индикатор -->
         <div
-            class="absolute backdrop-blur-lg bg-white/30 shadow-lg rounded-full transition-all duration-300 ease-in-out"
+            class="absolute bg-white/30 backdrop-blur-lg rounded-full transition-all duration-300 shadow-lg"
             :style="indicatorStyle"
         ></div>
 
-        <NuxtLink
-            ref="link0"
-            :to="{ name: 'favorites' }"
-            class="nav-link">
-          <IconHeart/>
-        </NuxtLink>
-
-        <NuxtLink
-            ref="link1"
-            :to="{ name: 'index' }"
-            class="nav-link">
-          <IconStore/>
-        </NuxtLink>
-
-        <NuxtLink
-            ref="link2"
-            :to="{ name: 'profile' }"
-            class="nav-link">
-          <IconUser/>
-        </NuxtLink>
-
+        <!-- Ссылки -->
+        <li
+            v-for="(link, index) in links"
+            :key="link.to"
+            ref="linkRefs"
+        >
+          <NuxtLink :to="link.to" class="nav-link block relative z-10">
+            <component :is="link.icon" />
+          </NuxtLink>
+        </li>
       </ul>
     </div>
   </nav>
 </template>
 
 <script setup lang="ts">
-import IconHeart from "~/components/icons/IconHeart.vue";
-import IconUser from "~/components/icons/IconUser.vue";
-import IconStore from "~/components/icons/IconStore.vue";
+import IconHeart from '~/components/icons/IconHeart.vue'
+import IconStore from '~/components/icons/IconStore.vue'
+import IconUser from '~/components/icons/IconUser.vue'
+import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
-const navRef = ref<HTMLElement | null>(null)
-const link0 = ref<ComponentPublicInstance | null>(null)
-const link1 = ref<ComponentPublicInstance | null>(null)
-const link2 = ref<ComponentPublicInstance | null>(null)
+const links = [
+  { to: '/favorites/subscriptions', icon: IconHeart },
+  { to: '/subscriptions', icon: IconStore },
+  { to: '/profile', icon: IconUser },
+]
+
+const linkRefs = ref<HTMLElement[]>([])
 
 const indicatorStyle = ref({
   left: '0px',
   width: '0px',
-  height: '50px',
-  top: '12px',
-  opacity: '0'
+  top: '0px',
+  height: '0px',
+  opacity: '0',
 })
 
-const routeIndexMap: Record<string, number> = {
-  'favorites': 0,
-  'index': 1,
-  'profile': 2,
-}
+const activeIndex = computed(() => {
+  if (route.path.startsWith('/favorites')) return 0
+  if (route.path.startsWith('/profile')) return 2
+  return 1
+})
 
-const activeIndex = computed(() => routeIndexMap[route.name as string] ?? 1)
+const updateIndicator = () => {
+  const active = linkRefs.value[activeIndex.value]
+  if (!active) return
 
-const updateIndicator = (index: number) => {
-  // Проверяем, что мы на клиенте
-  if (!process.client) return
-
-  const links = [link0.value, link1.value, link2.value]
-  const activeLink = links[index]
-
-  if (!activeLink || !navRef.value) return
-
-  // Получаем DOM элемент из компонента NuxtLink
-  const linkElement = (activeLink as any).$el as HTMLElement
-  if (!linkElement || typeof linkElement.getBoundingClientRect !== 'function') return
-
-  const navRect = navRef.value.getBoundingClientRect()
-  const linkRect = linkElement.getBoundingClientRect()
-
-  // Вычисляем позицию относительно контейнера
-  const left = linkRect.left - navRect.left
-  const width = linkRect.width
+  const rect = active.getBoundingClientRect()
+  const parentRect = active.parentElement!.getBoundingClientRect()
 
   indicatorStyle.value = {
-    left: `${left}px`,
-    width: `${width}px`,
-    height: '50px',
-    top: '12px',
-    opacity: '1'
+    left: `${rect.left - parentRect.left}px`,
+    width: `${rect.width}px`,
+    top: `${rect.top - parentRect.top}px`,
+    height: `${rect.height}px`,
+    opacity: '1',
   }
 }
 
-watch(activeIndex, (newIndex) => {
-  if (import.meta.client) {
-    nextTick(() => {
-      updateIndicator(newIndex)
-    })
-  }
+onMounted(async () => {
+  await nextTick()
+  linkRefs.value = Array.from(document.querySelectorAll('ul > li')) as HTMLElement[]
+  updateIndicator()
+  window.addEventListener('resize', updateIndicator)
 })
 
-onMounted(() => {
-  setTimeout(() => {
-    updateIndicator(activeIndex.value)
-  }, 100)
-
-  const handleResize = () => {
-    updateIndicator(activeIndex.value)
-  }
-
-  window.addEventListener('resize', handleResize)
-
-  onBeforeUnmount(() => {
-    window.removeEventListener('resize', handleResize)
-  })
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', updateIndicator)
 })
+
+watch(
+    () => route.path,
+    async () => {
+      await nextTick()
+      updateIndicator()
+    }
+)
 </script>
 
 <style scoped lang="postcss">
 .nav-wrapper {
   @apply relative p-px rounded-full;
-  background: linear-gradient(135deg,
-  rgba(0, 0, 0, 1) 0%,
-  rgba(255, 255, 255, 0.2) 25%,
-  rgba(255, 255, 255, 0.2) 75%,
-  rgba(0, 0, 0, 1) 100%
+  background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(255, 255, 255, 0.2) 25%,
+      rgba(255, 255, 255, 0.2) 75%,
+      rgba(0, 0, 0, 1) 100%
   );
 }
 
 ul {
   @apply bg-black/80;
-  box-shadow: 0 0 30px 1px rgba(0,0,0,0.25) inset;
+  box-shadow: 0 0 30px 1px rgba(0, 0, 0, 0.25) inset;
 }
 
 .nav-link {
-  @apply transition-all duration-300 py-4 px-[2.5rem] relative z-10;
+  @apply py-4 px-[2.5rem] transition-all duration-300;
 }
 </style>

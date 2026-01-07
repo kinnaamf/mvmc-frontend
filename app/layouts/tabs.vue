@@ -1,10 +1,5 @@
 <script setup lang="ts">
-const tabs = [
-  { label: 'Подписки', to: '/' },
-  { label: 'Товары', to: '/items' },
-  // { label: '', to: '/favorites' },
-  // { label: '', to: '/favorites/items' },
-]
+const tabs = useTabs()
 </script>
 
 <template>
@@ -12,9 +7,7 @@ const tabs = [
     <div class="">
       <TabSwitcher :tabs="tabs"/>
     </div>
+
+    <slot/>
   </div>
 </template>
-
-<style scoped lang="postcss">
-
-</style>
