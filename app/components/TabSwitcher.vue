@@ -53,7 +53,10 @@ watch(() => route.path, () => {
 }
 
 .active-indicator {
-  @apply absolute w-[9.375rem] h-[3.125rem] pointer-events-none top-1/2 -translate-y-1/2 transition-all duration-300 -z-10 rounded-full border border-neutral-900 bg-white/5;
+  @apply absolute w-[9.375rem] h-[3.125rem] pointer-events-none top-1/2 -translate-y-1/2 transition-all duration-300 -z-10 rounded-full bg-white/5;
   box-shadow: 0 0 30px 1px rgba(0, 0, 0, 0.25) inset;
+  border: 1px solid rgba(255,255,255,0.13);
+  border-top-color: rgba(255,255,255,0.15);
+  border-left-color: rgba(255,255,255,0.18);
 }
 </style>
