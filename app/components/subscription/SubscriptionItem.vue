@@ -1,17 +1,36 @@
 <template>
-<div class="card-container flex items-center justify-between">
-  <div class="flex gap-3 items-center">
-    <img :src="subscription.avatar_url" alt=""
-         :style="{borderColor: subscription.ring_color}"
-         class="w-14 h-14 rounded-full border-2">
-    <div class="flex flex-col text-white/90">
-      <span class="text-base font-semibold">{{ subscription.title }}</span>
-      <span class="-mt-1 text-sm font-light">{{ subscription.username }}</span>
+<div class="card-container min-h-[5.125rem]">
+  <div class="flex items-center justify-between">
+    <div class="flex gap-3 items-center">
+      <img :src="subscription.avatar_url" alt=""
+           :style="{borderColor: subscription.ring_color}"
+           class="w-14 h-14 rounded-full border-2">
+      <div class="flex flex-col text-white/90">
+        <span class="text-base font-semibold">{{ subscription.title }}</span>
+        <span class="-mt-1 text-sm font-light">{{ subscription.username }}</span>
+      </div>
+    </div>
+    <div class="relative p-px rounded-full bg-gradient-to-br from-neutral-900 via-neutral-700 to-neutral-500">
+      <div class="bg-neutral-400 rounded-full p-[0.625rem] icon-container">
+        <IconPlus/>
+      </div>
     </div>
   </div>
-  <div class="relative p-px rounded-full bg-gradient-to-br from-neutral-900 via-neutral-700 to-neutral-500">
-    <div class="bg-neutral-400 rounded-full p-[0.625rem] icon-container">
-      <IconPlus/>
+  <div class="mt-4 w-full">
+    <div class="flex justify-between">
+      <div class="w-2/3">
+        <span>{{ subscription.description }}</span>
+      </div>
+      <div>
+        <div class="price-badge">
+          <h4 class="text-sm font-bold">{{ subscription.price }}₽<span class="font-medium">/мес</span></h4>
+        </div>
+      </div>
+    </div>
+    <div class="mt-6 text-center button-container w-full">
+      <a @click.prevent href="#" class="uppercase font-bold">
+        Подписаться
+      </a>
     </div>
   </div>
 </div>

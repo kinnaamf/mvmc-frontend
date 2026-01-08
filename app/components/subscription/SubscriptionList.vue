@@ -1,9 +1,10 @@
 <template>
-<div class="space-y-3">
-  <div v-for="subscription in subscriptions">
-    <SubscriptionItem :subscription="subscription" />
+  <div class="space-y-3">
+    <SubscriptionItem
+        v-for="subscription in subscriptions"
+        :key="subscription.id"
+        :subscription="subscription"/>
   </div>
-</div>
 </template>
 
 <script setup lang="ts">

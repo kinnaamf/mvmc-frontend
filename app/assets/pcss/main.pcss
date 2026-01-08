@@ -26,3 +26,47 @@ main {
 
   @apply py-3 px-[1.125rem];
 }
+
+.price-badge {
+  @apply inline-block py-3 px-4 rounded-full relative z-20;
+  background: linear-gradient(135deg, #132222 0%, #041313 100%);
+}
+
+.price-badge::before {
+  @apply rounded-full pointer-events-none;
+
+  content: '';
+  position: absolute;
+  inset: 0;
+
+  padding: 1px;
+
+  background: linear-gradient(180deg, #4f5e5e 0%, #1a2e25 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+
+  mask-composite: exclude;
+}
+
+.button-container {
+  @apply inline-block py-3 rounded-full relative z-20;
+  background: linear-gradient(90deg, #101010 0%, #171717 100%);
+
+  box-shadow: 0 100px 10px 1px inset rgba(0, 0, 0, 0.2);
+}
+
+.button-container::before {
+  @apply rounded-full pointer-events-none;
+
+  content: '';
+  position: absolute;
+  inset: 0;
+
+  padding: 1px;
+
+  background: linear-gradient(90deg, #363636 0%, #111111 5%, #111111 95%, #363636 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+
+  mask-composite: exclude;
+}

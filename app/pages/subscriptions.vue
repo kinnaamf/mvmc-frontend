@@ -1,7 +1,5 @@
 <template>
-<!--  {{ $route.path }}-->
-
-<SubscriptionList :subscriptions="subscriptions"/>
+  <SubscriptionList :subscriptions="subscriptions"/>
 </template>
 
 <script setup lang="ts">
