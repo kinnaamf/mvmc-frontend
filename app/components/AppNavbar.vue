@@ -1,5 +1,5 @@
 <template>
-  <nav class="fixed left-0 right-0 px-6 bottom-4">
+  <nav class="fixed left-0 right-0 px-6 bottom-4 z-[111111111111]">
     <div class="relative backdrop-blur-sm nav-wrapper">
       <ul class="flex justify-between relative rounded-full py-3 px-3">
 
