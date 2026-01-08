@@ -1,20 +1,18 @@
 <template>
   <div class="flex justify-center mt-10 mb-24">
-    <div ref="tabsContainerRef" class="relative flex gap-4">
-      <!-- p-px :style="indicatorStyle" -->
-      <div
-          class="absolute rounded-full transition-all duration-300 ease-in-out pointer-events-none indicator"
+    <div ref="containerRef" class="relative flex gap-20">
 
-      >
-        <div class="w-full h-full rounded-full bg-black/90"></div>
-      </div>
+      <div class="active-indicator" :style="indicatorStyle"></div>
 
       <NuxtLink
           v-for="tab in tabs"
-          :to="tab.to" class="tab-link">
-        <span>{{ tab.label }}</span>
+          :key="tab.to"
+          :to="tab.to"
+          class="tab-link"
+          active-class="tab-link-active"
+      >
+        {{ tab.label }}
       </NuxtLink>
-
     </div>
   </div>
 </template>
@@ -22,29 +20,40 @@
 <script setup lang="ts">
 import type { Tab } from "~/types/tab"
 
+const route = useRoute()
+
 const props = defineProps<{
   tabs: Tab[]
 }>()
+
+const containerRef = ref<HTMLElement>()
+
+const indicatorStyle = ref({
+  left: '-40px',
+})
+
+onMounted(() => {
+  if (!import.meta.client) return
+  if (!containerRef.value) return
+
+  console.log(route.path)
+
+  setTimeout(() => {
+  }, 1)
+})
+
+watch(() => route.path, () => {
+  route.path.includes('items') ? indicatorStyle.value.left = '110px' : indicatorStyle.value.left = '-40px'
+})
 </script>
 
 <style scoped lang="postcss">
 .tab-link {
-  @apply transition-all duration-300 ease-in-out;
+  @apply w-max
 }
 
-.tab-content {
-  @apply block py-4 px-12 rounded-full text-white/70;
-  background: transparent;
-  box-shadow: 0 0 16px 1px rgba(255, 255, 255, 0) inset;
-  transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out 0.15s;
-}
-
-.tab-link.active .tab-content {
-  @apply text-white;
-  box-shadow: 0 0 16px 1px rgba(255, 255, 255, 0.05) inset;
-}
-
-.indicator {
-  background: linear-gradient(8deg, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0.2) 25%, rgba(255, 255, 255, 0.5) 75%, rgba(0, 0, 0, 1) 100%)
+.active-indicator {
+  @apply absolute w-[9.375rem] h-[3.125rem] pointer-events-none top-1/2 -translate-y-1/2 transition-all duration-300 -z-10 rounded-full border border-neutral-900 bg-white/5;
+  box-shadow: 0 0 30px 1px rgba(0, 0, 0, 0.25) inset;
 }
 </style>

@@ -3,11 +3,9 @@ const tabs = useTabs()
 </script>
 
 <template>
-  <div>
-    <div class="">
-      <TabSwitcher :tabs="tabs"/>
-    </div>
 
-    <slot/>
-  </div>
+  <TabSwitcher :tabs="tabs"/>
+
+  <slot/>
+
 </template>

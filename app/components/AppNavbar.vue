@@ -1,14 +1,13 @@
 <template>
-  <nav class="fixed bottom-0 left-0 right-0 px-6 mb-4">
+  <nav class="fixed left-0 right-0 px-6 bottom-4">
     <div class="relative backdrop-blur-sm nav-wrapper">
       <ul class="flex justify-between relative rounded-full py-3 px-3">
-        <!-- Индикатор -->
+
         <div
             class="absolute bg-white/30 backdrop-blur-lg rounded-full transition-all duration-300 shadow-lg"
             :style="indicatorStyle"
         ></div>
 
-        <!-- Ссылки -->
         <li
             v-for="(link, index) in links"
             :key="link.to"
