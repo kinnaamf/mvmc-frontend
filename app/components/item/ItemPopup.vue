@@ -15,7 +15,7 @@
                                                                                                }}</span>
           </div>
         </div>
-        <div>
+        <div class="text-container">
           <span>{{ selectedItem.description }}</span>
         </div>
         <div>
@@ -217,5 +217,11 @@ input[type="range"]::-moz-range-track {
   height: 4px;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 9999px;
+}
+
+.text-container {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 </style>
