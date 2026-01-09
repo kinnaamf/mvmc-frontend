@@ -32,7 +32,7 @@
             </div>
           </div>
         </div>
-        <div class="mt-6 text-center button-container w-full">
+        <div class="mt-6 text-center button-container py-3 w-full">
           <a @click.prevent @click.stop href="#" class="uppercase font-bold"> Подписаться </a>
         </div>
       </div>
