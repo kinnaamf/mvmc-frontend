@@ -9,11 +9,13 @@
       />
     </div>
 
-    <ItemPopup
-        v-if="selectedItem"
-        :selected-item="selectedItem"
-        @close="selectedItem = null"
-    />
+    <Teleport to="body">
+      <ItemPopup
+          v-if="selectedItem"
+          :selected-item="selectedItem"
+          @close="selectedItem = null"
+      />
+    </Teleport>
   </div>
 </template>
 

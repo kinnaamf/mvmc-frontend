@@ -38,8 +38,8 @@
           </div>
         </div>
         <div class="flex items-center gap-4">
-          <div class="button-container w-full py-3 text-center">
-            <a href="#" @click.prevent class="button-container uppercase font-bold">Купить</a>
+          <div class="button-container w-full text-center">
+            <a href="#" @click.prevent class="button-container h-full w-full py-3 uppercase font-bold">Купить</a>
           </div>
           <h4 class="text-sm font-bold w-1/2">{{ selectedItem.price }}₽<span class="font-medium">/мес</span></h4>
         </div>
@@ -143,11 +143,11 @@ onBeforeUnmount(() => {
 }
 
 .popup-shadow {
-  @apply absolute w-screen min-h-screen bg-black/70 top-0 left-0 flex items-center justify-center;
+  @apply fixed w-screen h-screen bg-black/70 top-0 left-0 flex items-center justify-center;
 }
 
 .popup-container {
-  @apply bg-[#0A0A0A]/80;
+  @apply bg-[#0A0A0A]/80 max-w-sm;
 
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.10);
@@ -157,7 +157,7 @@ onBeforeUnmount(() => {
 input[type="range"] {
   @apply w-full outline-none rounded-full bg-white/50 appearance-none;
 
-  height: 4px; /* или h-1 */
+  height: 4px;
   -webkit-appearance: none;
   -webkit-tap-highlight-color: transparent;
   tap-highlight-color: transparent;
@@ -183,7 +183,7 @@ input[type="range"]::-webkit-slider-thumb {
   0 6px 16px rgba(0, 0, 0, 0.6);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  margin-top: -10px; /* (24px - 4px) / 2 = 10px */
+  margin-top: -10px;
 }
 
 input[type="range"]::-webkit-slider-runnable-track {

@@ -22,7 +22,7 @@
 <script setup lang="ts">
 useHead({
   bodyAttrs: {
-    class: 'bg-[#030303] px-6 min-h-screen'
+    class: 'bg-[#030303] px-6 min-h-screen text-white'
   }
 })
 
