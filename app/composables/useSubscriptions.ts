@@ -1,6 +1,6 @@
 import type { Subscription } from "~/types/subscription";
 
-export const useSubscription = () => {
+export const useSubscriptions = () => {
   const api = useApi();
 
   const subscriptions = useState<Subscription[]>('subscriptions', () => []);

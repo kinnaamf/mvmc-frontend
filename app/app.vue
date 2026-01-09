@@ -1,10 +1,13 @@
 <template>
   <div>
-    <header class="mt-8">
+
+    <header class="transition-all duration-300 ease-in-out overflow-hidden"
+            :class="showLogo ? 'mt-8 max-h-32 opacity-100' : 'mt-0 max-h-0 opacity-0'"
+    >
       <AppLogo class="text-white"/>
     </header>
 
-    <main>
+    <main class="transition-all duration-300">
       <NuxtLayout>
         <NuxtPage/>
       </NuxtLayout>
@@ -21,5 +24,11 @@ useHead({
   bodyAttrs: {
     class: 'bg-[#030303] px-6 min-h-screen'
   }
+})
+
+const route = useRoute()
+
+const showLogo = computed(() => {
+  return !route.path.includes('favorites')
 })
 </script>

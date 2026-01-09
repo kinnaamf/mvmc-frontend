@@ -9,7 +9,7 @@ definePageMeta({
   layout: 'tabs'
 })
 
-const { subscriptions, getSubscriptions, loading } = useSubscription()
+const { subscriptions, getSubscriptions, loading } = useSubscriptions()
 
 onMounted(async () => {
   await getSubscriptions()
