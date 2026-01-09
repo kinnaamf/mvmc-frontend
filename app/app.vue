@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <header class="transition-all duration-300 ease-in-out overflow-hidden"
             :class="showLogo ? 'mt-8 max-h-32 opacity-100' : 'mt-0 max-h-0 opacity-0'"
     >

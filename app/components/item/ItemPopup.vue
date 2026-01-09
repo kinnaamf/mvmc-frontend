@@ -10,9 +10,8 @@
         <div class="flex gap-4">
           <img :src="selectedItem.avatar_url" alt="" class="w-16 h-16 rounded-2xl">
           <div class="flex flex-col">
-            <span class="text-xl font-bold line-clamp-1">{{ selectedItem.title }}</span> <span>{{
-              selectedItem.username
-                                                                                               }}</span>
+            <span class="text-xl font-bold line-clamp-1">{{ selectedItem.title }}</span>
+            <span>{{ selectedItem.username }}</span>
           </div>
         </div>
         <div class="text-container">
@@ -143,11 +142,11 @@ onBeforeUnmount(() => {
 }
 
 .popup-shadow {
-  @apply fixed w-screen h-screen bg-black/70 top-0 left-0 flex items-center justify-center;
+  @apply fixed w-screen h-screen bg-black/70 top-0 left-0 px-6 flex items-center;
 }
 
 .popup-container {
-  @apply bg-[#0A0A0A]/80 max-w-sm;
+  @apply bg-[#0A0A0A]/80 w-full;
 
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.10);

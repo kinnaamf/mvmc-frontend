@@ -9,7 +9,7 @@
       />
     </div>
 
-    <Teleport to="body">
+    <Teleport to="#teleports">
       <ItemPopup
           v-if="selectedItem"
           :selected-item="selectedItem"
