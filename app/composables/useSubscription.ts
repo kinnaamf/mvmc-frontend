@@ -14,10 +14,9 @@ export const useSubscription = () => {
 
     try {
       subscriptions.value = await api<Subscription[]>(`/api/v1/subscriptions`);
-      console.log(subscriptions.value);
     } catch (error) {
       loading.value = false;
-      console.error(error);
+      console.log(error);
     } finally {
       loading.value = false;
     }

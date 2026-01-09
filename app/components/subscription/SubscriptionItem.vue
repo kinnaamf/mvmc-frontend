@@ -1,5 +1,5 @@
 <template>
-  <div class="card-container transition-all duration-300 ease-in-out overflow-hidden"
+  <div class="card-container py-3 px-[1.125rem] transition-all duration-300 ease-in-out overflow-hidden"
        :class="{ 'min-h-[5.125rem]': !showContent }"
        @click="showContent = !showContent">
     <div class="flex items-center justify-between">
