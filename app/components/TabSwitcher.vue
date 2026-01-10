@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center mt-10 mb-24">
+  <div class="flex justify-center mt-10 mb-16">
     <div ref="containerRef" class="relative flex gap-20">
 
       <div class="active-indicator" :style="indicatorStyle"></div>
