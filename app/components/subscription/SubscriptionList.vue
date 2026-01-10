@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-3">
+  <div class="space-y-3 pb-28">
     <SubscriptionItem
         v-for="subscription in subscriptions"
         :key="subscription.id"
