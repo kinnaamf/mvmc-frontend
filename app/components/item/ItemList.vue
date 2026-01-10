@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pb-28">
     <div class="grid grid-cols-2 gap-4">
       <ItemSingle
           v-for="item in items"
@@ -10,20 +10,23 @@
     </div>
 
     <Teleport to="#teleports">
-      <Transition name="fade">
-        <div v-if="selectedItem" class="popup-shadow px-6" @click="selectedItem = null">
-          <Transition name="slide-up" appear>
-            <div v-if="selectedItem">
-              <ItemPopup
-                  :selected-item="selectedItem"
-                  @close="selectedItem = null"
-                  class="backdrop-blur-sm z-50"
-              />
-            </div>
-          </Transition>
-        </div>
-      </Transition>
+      <div
+          v-show="selectedItem"
+          id="shadow"
+          class="popup-shadow px-6"
+          @click.self="selectedItem = null"
+      >
+        <Transition name="slide-up">
+          <ItemPopup
+              v-if="selectedItem"
+              :selected-item="selectedItem"
+              @close="selectedItem = null"
+              class="backdrop-blur-sm z-[100]"
+          />
+        </Transition>
+      </div>
     </Teleport>
+
   </div>
 </template>
 
@@ -43,63 +46,23 @@ const openPopup = (item: Item) => {
 </script>
 
 <style scoped lang="postcss">
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
 
 .slide-up-enter-active {
-  animation: bounce-in-top .9s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.3s ease-out;
 }
 
 .slide-up-leave-active {
-  animation: slide-out-bottom 0.3s ease-out;
-}
-
-@keyframes bounce-in-top {
-  0% {
-    opacity: 0;
-    transform: translateY(100vh);
-  }
-  50% {
-    opacity: 1;
-    transform: translateY(-15px);
-  }
-  75% {
-    transform: translateY(5px);
-  }
-  90% {
-    transform: translateY(-2px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-@keyframes slide-out-bottom {
-  0% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(100vh);
-  }
+  transition: all 0.3s ease-in;
 }
 
 .slide-up-enter-from {
+  transform: translateY(100%);
   opacity: 0;
-  transform: translateY(100vh);
 }
 
 .slide-up-leave-to {
+  transform: translateY(100%);
   opacity: 0;
-  transform: translateY(100vh);
 }
 
 .popup-shadow {
