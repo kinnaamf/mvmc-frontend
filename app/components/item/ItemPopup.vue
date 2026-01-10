@@ -1,8 +1,4 @@
 <template>
-  <div
-      class="popup-shadow"
-      @click="$emit('close')">
-
     <div
         class="popup-container px-10 py-8 z-10"
         @click.stop>
@@ -59,7 +55,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script setup lang="ts">

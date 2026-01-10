@@ -8,14 +8,13 @@
              :style="{borderColor: subscription.ring_color}"
              class="w-14 h-14 rounded-full border-2">
         <div class="flex flex-col text-white/90">
-          <span class="text-base font-semibold">{{ subscription.title }}</span> <span class="-mt-1 text-sm font-light">{{
-            subscription.username
-                                                                                                                       }}</span>
+          <span class="text-base font-semibold">{{ subscription.title }}</span>
+          <span class="-mt-1 text-sm font-light">{{ subscription.username }}</span>
         </div>
       </div>
       <div class="relative p-px rounded-full bg-gradient-to-br from-neutral-900 via-neutral-700 to-neutral-500">
         <div class="bg-neutral-400 rounded-full p-[0.625rem] icon-container">
-          <IconPlus/>
+          <IconPlus :show-content="showContent" />
         </div>
       </div>
     </div>

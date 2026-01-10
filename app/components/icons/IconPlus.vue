@@ -1,10 +1,13 @@
 <script setup lang="ts">
-const isClicked = ref<boolean>(false);
+// const isClicked = ref<boolean>(false);
+
+defineProps<{
+  showContent: boolean
+}>()
 </script>
 
 <template>
   <svg
-      @click="isClicked = !isClicked"
       xmlns="http://www.w3.org/2000/svg"
        width="24"
        height="24"
@@ -21,7 +24,7 @@ const isClicked = ref<boolean>(false);
     />
     <path
         class="vertical-line"
-        :class="{ 'rotate-90': isClicked }"
+        :class="{ 'rotate-90': showContent }"
         d="M12 5v14"
     />
   </svg>
