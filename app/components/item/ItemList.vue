@@ -33,3 +33,7 @@ const openPopup = (item: Item) => {
   selectedItem.value = item;
 }
 </script>
+
+<style scoped>
+
+</style>

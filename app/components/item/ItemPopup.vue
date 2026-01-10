@@ -1,18 +1,25 @@
 <template>
-  <div class="popup-shadow" @click="$emit('close')">
-    <div class="popup-container px-10 pt-4 pb-8 backdrop-blur-sm z-10" @click.stop>
-      <div class="flex justify-end" @click="$emit('close')">
-        <a href="#" @click.prevent class="button-container p-1 mb-3">
-          <IconCross class="scale-90"/>
-        </a>
-      </div>
+  <div
+      class="popup-shadow"
+      @click="$emit('close')">
+
+    <div
+        class="popup-container px-10 py-8 backdrop-blur-sm z-10"
+        @click.stop>
+
+
       <div class="flex flex-col gap-10">
         <div class="flex gap-4">
-          <img :src="selectedItem.avatar_url" alt="" class="w-16 h-16 rounded-2xl">
+
+          <img
+              :src="selectedItem.avatar_url"
+              alt=""
+              class="w-16 h-16 rounded-2xl">
+
           <div class="flex flex-col">
             <span class="text-xl font-bold line-clamp-1">{{ selectedItem.title }}</span>
-            <span>{{ selectedItem.username }}</span>
-          </div>
+            <span>{{ selectedItem.username }}</span></div>
+
         </div>
         <div class="text-container">
           <span>{{ selectedItem.description }}</span>
@@ -36,11 +43,17 @@
             <audio ref="audio" src="/BAK.wav" preload="metadata"></audio>
           </div>
         </div>
-        <div class="flex items-center gap-4">
-          <div class="button-container w-full text-center">
-            <a href="#" @click.prevent class="button-container h-full w-full py-3 uppercase font-bold">Купить</a>
+        <div class="w-full flex justify-between gap-4">
+          <div class="button-container p-4 w-full text-center">
+            <a href="#" @click.prevent class="font-bold"> <span>Купить</span> <span class="ml-3 mr-3">|</span>
+              <span>{{ selectedItem.price }}₽</span> </a>
           </div>
-          <h4 class="text-sm font-bold w-1/2">{{ selectedItem.price }}₽<span class="font-medium">/мес</span></h4>
+          <div @click="$emit('close')" class="button-container p-4">
+            <a href="#"
+               @click.prevent>
+              <IconCross/>
+            </a>
+          </div>
         </div>
       </div>
     </div>
