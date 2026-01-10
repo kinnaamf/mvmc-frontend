@@ -53,9 +53,12 @@ const openPopup = (item: Item) => {
   opacity: 0;
 }
 
-.slide-up-enter-active,
+.slide-up-enter-active {
+  animation: bounce-in-top .9s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
 .slide-up-leave-active {
-  animation: bounce-in-top .8s ease;
+  animation: slide-out-bottom 0.3s ease-out;
 }
 
 @keyframes bounce-in-top {
@@ -63,27 +66,35 @@ const openPopup = (item: Item) => {
     opacity: 0;
     transform: translateY(100vh);
   }
-  60% {
+  50% {
     opacity: 1;
-    transform: translateY(-30px);
+    transform: translateY(-15px);
   }
-  80% {
-    transform: translateY(10px);
+  75% {
+    transform: translateY(5px);
+  }
+  90% {
+    transform: translateY(-2px);
   }
   100% {
     transform: translateY(0);
   }
 }
 
+@keyframes slide-out-bottom {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100vh);
+  }
+}
+
 .slide-up-enter-from {
   opacity: 0;
   transform: translateY(100vh);
-}
-
-.slide-up-enter-to,
-.slide-up-leave-from {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .slide-up-leave-to {
