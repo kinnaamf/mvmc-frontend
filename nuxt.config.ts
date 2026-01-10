@@ -1,5 +1,23 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  app: {
+    head: {
+      script: [
+        {
+          src: 'https://telegram.org/js/telegram-web-app.js',
+          async: true,
+          defer: true
+        }
+      ],
+      meta: [
+        {
+          'http-equiv': 'Content-Security-Policy',
+          content: "default-src 'self' https://telegram.org; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://telegram.org; style-src 'self' 'unsafe-inline';"
+        }
+      ]
+    }
+  },
+
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
 

@@ -29,14 +29,23 @@ export const useTelegram = () => {
 
     const waitForTelegram = (): Promise<any> => {
       return new Promise((resolve, reject) => {
+        console.log('🔍 Checking for Telegram SDK...')
+        console.log('window.Telegram:', window.Telegram)
+        console.log('window.Telegram?.WebApp:', window.Telegram?.WebApp)
+
         let attempts = 0
         const maxAttempts = 50
 
         const check = () => {
           if (window.Telegram?.WebApp) {
+            console.log('✅ Telegram SDK found!')
+            console.log('🔍 WebApp object keys:', Object.keys(window.Telegram.WebApp))
+            console.log('🔍 Raw initData:', window.Telegram.WebApp.initData)
+            console.log('🔍 Raw initDataUnsafe:', window.Telegram.WebApp.initDataUnsafe)
             resolve(window.Telegram.WebApp)
           } else if (attempts < maxAttempts) {
             attempts++
+            console.log(`⏳ Attempt ${attempts}/${maxAttempts}`)
             setTimeout(check, 100)
           } else {
             reject(new Error('Telegram WebApp not loaded'))
