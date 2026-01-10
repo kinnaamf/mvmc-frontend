@@ -14,12 +14,21 @@
 </template>
 
 <script setup lang="ts">
-const { user, initData } = useTelegram()
+const { user, initData, isReady } = useTelegram()
 
-onMounted(() => {
-  console.log(user.value);
-  console.log(initData.value);
+watch(isReady, (ready) => {
+  if (ready) {
+    console.log('User: ', user.value)
+    console.log('InitData: ', initData)
+  }
 })
+
+watchEffect(() => {
+  if (user.value) {
+    console.log('User loaded: ', user.value)
+  }
+})
+
 </script>
 
 
