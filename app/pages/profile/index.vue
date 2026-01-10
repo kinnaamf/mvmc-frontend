@@ -15,6 +15,11 @@
 
 <script setup lang="ts">
 const { user, initData } = useTelegram()
+
+onMounted(() => {
+  console.log(user.value);
+  console.log(initData.value);
+})
 </script>
 
 
