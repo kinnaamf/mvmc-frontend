@@ -23,7 +23,7 @@ export const useTelegram = () => {
       return initPromise
     }
 
-    if (!process.client) {
+    if (!import.meta.client) {
       return null
     }
 
@@ -55,26 +55,48 @@ export const useTelegram = () => {
 
         initData.value = webApp.value.initData || ''
         user.value = webApp.value.initDataUnsafe?.user || null
-        isReady.value = true
 
-        console.log('Telegram WebApp initialized:', {
+        console.log('🔍 Telegram WebApp Debug:', {
           hasInitData: !!initData.value,
           initDataLength: initData.value.length,
+          initDataValue: initData.value,
           user: user.value,
-          fullInitDataUnsafe: webApp.value.initDataUnsafe
+          fullInitDataUnsafe: webApp.value.initDataUnsafe,
+          allWebAppKeys: Object.keys(webApp.value),
+          platform: webApp.value.platform,
+          version: webApp.value.version
         })
 
-        if (import.meta.dev && (!user.value || initData.value === 'user')) {
-          console.warn('⚠️ No real Telegram data, using mock for development')
-          user.value = {
-            id: 123456789,
-            first_name: 'Test',
-            last_name: 'User',
-            username: 'testuser',
-            language_code: 'ru'
+        const hasRealTelegramData =
+          user.value &&
+          typeof user.value.id === 'number' &&
+          initData.value.length > 10 &&
+          initData.value !== 'user'
+
+        if (!hasRealTelegramData) {
+          console.warn('No valid Telegram data detected')
+
+          if (import.meta.dev) {
+            console.warn('Using mock data for development')
+            user.value = {
+              id: 123456789,
+              first_name: 'Test',
+              last_name: 'User',
+              username: 'testuser',
+              language_code: 'ru',
+              photo_url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=test'
+            }
+            initData.value = 'mock_init_data_for_dev'
+          } else {
+            error.value = 'This app must be opened through Telegram'
+            isReady.value = false
+            return null
           }
-          initData.value = 'mock_init_data_for_dev'
         }
+
+        isReady.value = true
+
+        console.log('Telegram initialized with user:', user.value)
 
         return {
           initData: initData.value,
@@ -86,13 +108,14 @@ export const useTelegram = () => {
         error.value = 'Failed to initialize Telegram WebApp'
 
         if (import.meta.dev) {
-          console.warn('⚠Using mock data in development mode')
+          console.warn('Fallback to mock data in development mode')
           user.value = {
-            id: 123456789,
+            id: 987654321,
             first_name: 'Dev',
             last_name: 'User',
             username: 'devuser',
-            language_code: 'en'
+            language_code: 'en',
+            photo_url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=dev'
           }
           initData.value = 'mock_init_data'
           isReady.value = true
@@ -118,10 +141,18 @@ export const useTelegram = () => {
       await init()
     }
 
+    // Если инициализация не удалась
+    if (!isReady.value) {
+      loading.value = false
+      return false
+    }
+
     loading.value = true
     error.value = ''
 
-    if (!initData.value || initData.value === 'mock_init_data' || initData.value === 'mock_init_data_for_dev') {
+    const isMockData = ['mock_init_data', 'mock_init_data_for_dev'].includes(initData.value)
+
+    if (isMockData) {
       loading.value = false
 
       if (import.meta.dev) {
@@ -142,11 +173,18 @@ export const useTelegram = () => {
       })
 
       userData.value = response.user || user.value
-      console.log('✅ User validated:', userData.value)
+      console.log('User validated:', userData.value)
       return true
     } catch (e: any) {
       error.value = e?.data?.message || 'Validation error'
       console.error('Validation failed:', e)
+
+      if (import.meta.dev) {
+        console.warn('Using local user data after validation error')
+        userData.value = user.value
+        return true
+      }
+
       return false
     } finally {
       loading.value = false
