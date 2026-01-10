@@ -36,8 +36,6 @@ onMounted(() => {
   if (!import.meta.client) return
   if (!containerRef.value) return
 
-  console.log(route.path)
-
   setTimeout(() => {
   }, 1)
 })

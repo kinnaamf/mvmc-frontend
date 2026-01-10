@@ -12,7 +12,15 @@ export default defineNuxtConfig({
       meta: [
         {
           'http-equiv': 'Content-Security-Policy',
-          content: "default-src 'self' https://telegram.org; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://telegram.org; style-src 'self' 'unsafe-inline';"
+          content: [
+            "default-src 'self' https://telegram.org https://api.mvmc.work",
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://telegram.org",
+            "style-src 'self' 'unsafe-inline'",
+            "img-src 'self' data: https: http:",
+            "connect-src 'self' https://api.mvmc.work https://telegram.org",
+            "font-src 'self' data:",
+            "frame-src 'self' https://telegram.org"
+          ].join('; ')
         }
       ]
     }
