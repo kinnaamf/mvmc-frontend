@@ -47,22 +47,33 @@ const openPopup = (item: Item) => {
 
 <style scoped lang="postcss">
 
+@keyframes slideUpBounce {
+  0% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+  45% {
+    transform: translateY(-8px);
+    opacity: 1;
+  }
+  65% {
+    transform: translateY(4px);
+  }
+  82% {
+    transform: translateY(-2px);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 .slide-up-enter-active {
-  transition: all 0.3s ease-out;
+  animation: slideUpBounce 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .slide-up-leave-active {
-  transition: all 0.3s ease-in;
-}
-
-.slide-up-enter-from {
-  transform: translateY(100%);
-  opacity: 0;
-}
-
-.slide-up-leave-to {
-  transform: translateY(100%);
-  opacity: 0;
+  animation: slideUpBounce 0.35s cubic-bezier(0.7, 0, 0.84, 0) reverse;
 }
 
 .popup-shadow {

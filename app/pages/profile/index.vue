@@ -22,10 +22,8 @@
         </div>
         <div class="text-center w-full">
           <h2 class="text-xl font-bold">
-            {{ userData?.first_name }} {{ userData?.last_name }}
+            @{{ userData?.username || 'no_username' }}
           </h2>
-          <span class="text-gray-600">@{{ userData?.username || 'no_username' }}</span>
-          <p class="text-sm text-gray-500 mt-2">ID: {{ userData?.id }}</p>
         </div>
       </div>
     </div>
