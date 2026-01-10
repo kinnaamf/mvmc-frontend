@@ -15,6 +15,7 @@
             v-if="selectedItem"
             :selected-item="selectedItem"
             @close="selectedItem = null"
+            class="backdrop-blur-sm"
         />
       </Transition>
     </Teleport>
@@ -36,28 +37,25 @@ const openPopup = (item: Item) => {
 }
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
 .slide-up-enter-from {
   opacity: 0;
   transform: translateY(300px);
-  transition: all .3s;
 }
 
-.slide-up-enter-to {
-  opacity: 1;
-  transform: translateY(0);
-  transition: all .3s;
-}
-
+.slide-up-enter-to,
 .slide-up-leave-from {
   opacity: 1;
   transform: translateY(0);
-  transition: all .3s;
 }
 
 .slide-up-leave-to {
   opacity: 0;
   transform: translateY(200px);
-  transition: all .3s;
 }
 </style>

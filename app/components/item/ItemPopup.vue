@@ -4,7 +4,7 @@
       @click="$emit('close')">
 
     <div
-        class="popup-container px-10 py-8 backdrop-blur-sm z-10"
+        class="popup-container px-10 py-8 z-10"
         @click.stop>
 
 
@@ -44,12 +44,13 @@
             <audio ref="audio" src="/BAK.wav" preload="metadata"></audio>
           </div>
         </div>
-        <div class="w-full flex justify-between gap-4">
-          <div class="button-container p-4 w-full text-center">
-            <a href="#" @click.prevent class="font-bold"> <span>Купить</span> <span class="ml-3 mr-3">|</span>
-              <span>{{ selectedItem.price }}₽</span> </a>
-          </div>
-          <div @click="$emit('close')" class="button-container p-4">
+        <div class="flex items-center justify-between gap-4">
+            <a href="#" @click.prevent class="font-bold button-container p-3 w-full text-center">
+              <span>Купить</span>
+              <span class="ml-3 mr-3">|</span>
+              <span>{{ selectedItem.price }}₽</span>
+            </a>
+          <div @click="$emit('close')" class="button-container p-3">
             <a href="#"
                @click.prevent>
               <IconCross/>
@@ -135,7 +136,7 @@ onBeforeUnmount(() => {
 }
 
 .button-play {
-  @apply inline-block rounded-full relative z-20 p-[0.625rem]  ml-6;
+  @apply inline-block rounded-full relative z-20 p-[0.625rem] ml-6;
   background: linear-gradient(135deg, #132222 0%, #041313 100%);
 }
 
@@ -181,17 +182,17 @@ input[type="range"]::-webkit-slider-thumb {
 
   -webkit-appearance: none;
   appearance: none;
-  width: 5px;
+  width: 24px;
   height: 24px;
   border: none;
   background: radial-gradient(
       circle at top,
-      rgba(255, 255, 255, 0.9),
-      rgba(255, 255, 255, 0.1) 40%,
-      rgba(255, 255, 255, 0.1) 60%,
-      rgba(255, 255, 255, 0.05)
+      rgba(0, 0, 0, 0.9),
+      rgba(0, 0, 0, 0.1) 40%,
+      rgba(0, 0, 0, 0.1) 60%,
+      rgba(0, 0, 0, 0.05)
   );
-  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.6),
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.2),
   inset 0 -3px 6px rgba(0, 0, 0, 0.4),
   0 6px 16px rgba(0, 0, 0, 0.6);
   cursor: pointer;
