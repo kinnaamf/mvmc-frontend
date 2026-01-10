@@ -1,7 +1,3 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
   <div class="mt-12">
     <div class="flex flex-col items-center justify-center">
@@ -16,6 +12,11 @@
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+const { user, initData } = useTelegram()
+</script>
+
 
 <style scoped lang="postcss">
 
