@@ -10,11 +10,13 @@
     </div>
 
     <Teleport to="#teleports">
-      <ItemPopup
-          v-if="selectedItem"
-          :selected-item="selectedItem"
-          @close="selectedItem = null"
-      />
+      <Transition name="slide-up">
+        <ItemPopup
+            v-if="selectedItem"
+            :selected-item="selectedItem"
+            @close="selectedItem = null"
+        />
+      </Transition>
     </Teleport>
   </div>
 </template>
@@ -35,5 +37,27 @@ const openPopup = (item: Item) => {
 </script>
 
 <style scoped>
+.slide-up-enter-from {
+  opacity: 0;
+  transform: translateY(300px);
+  transition: all .3s;
+}
 
+.slide-up-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all .3s;
+}
+
+.slide-up-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all .3s;
+}
+
+.slide-up-leave-to {
+  opacity: 0;
+  transform: translateY(200px);
+  transition: all .3s;
+}
 </style>

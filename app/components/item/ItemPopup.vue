@@ -35,10 +35,11 @@
                   v-model="currentTime"
                   class="w-full"
                   @input="seek"
-              > <a href="#" @click.prevent class="button-play" @click="toggle">
-              <IconPlay v-if="!isPlaying"/>
-              <IconStop v-if="isPlaying"/>
-            </a>
+              >
+              <a href="#" @click.prevent class="button-play" @click="toggle">
+                <IconPlay v-if="!isPlaying"/>
+                <IconStop v-if="isPlaying"/>
+              </a>
             </div>
             <audio ref="audio" src="/BAK.wav" preload="metadata"></audio>
           </div>
@@ -155,7 +156,7 @@ onBeforeUnmount(() => {
 }
 
 .popup-shadow {
-  @apply fixed w-screen h-screen bg-black/70 top-0 left-0 px-6 flex items-center;
+  @apply fixed w-screen h-screen bg-black/70 top-0 left-0 px-6 flex items-center z-50;
 }
 
 .popup-container {
