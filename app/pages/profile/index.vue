@@ -26,16 +26,9 @@
           </h2>
           <span class="text-gray-600">@{{ userData?.username || 'no_username' }}</span>
           <p class="text-sm text-gray-500 mt-2">ID: {{ userData?.id }}</p>
-
-     >
-          <div v-if="import.meta.dev && ['mock_init_data', 'mock_init_data_for_dev'].includes(initData)"
-               class="mt-4 p-2 bg-yellow-100 text-yellow-800 rounded text-sm">
-            Development Mode - Mock Data
-          </div>
         </div>
       </div>
     </div>
-
 
     <div v-else class="text-center text-gray-500">
       Нет данных пользователя
@@ -44,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-const { init, validate, isReady, error, loading, userData, initData } = useTelegram()
+const { init, validate, isReady, error, loading, userData } = useTelegram()
 
 onMounted(async () => {
   await init()
