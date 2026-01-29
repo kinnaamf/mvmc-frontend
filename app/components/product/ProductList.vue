@@ -1,7 +1,7 @@
 <template>
   <div class="pb-28">
     <div class="grid grid-cols-2 gap-4">
-      <ItemSingle
+      <ProductItem
           v-for="item in items"
           :key="item.id"
           :item="item"
@@ -17,7 +17,7 @@
           @click.self="selectedItem = null"
       >
         <Transition name="slide-up">
-          <ItemPopup
+          <ProductPopup
               v-if="selectedItem"
               :selected-item="selectedItem"
               @close="selectedItem = null"
@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import type { Item } from '~/types/item';
-import ItemPopup from "~/components/item/ItemPopup.vue";
+import ProductPopup from "~/components/product/ProductPopup.vue";
 
 defineProps<{
   items: Item[];

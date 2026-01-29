@@ -1,12 +1,11 @@
 <template>
   <nav class="fixed left-0 right-0 px-6 bottom-4 z-20">
     <div class="relative backdrop-blur-sm nav-wrapper">
+      <span
+          class="absolute bg-white/30 backdrop-blur-lg rounded-full transition-all duration-300 shadow-lg"
+          :style="indicatorStyle"
+      ></span>
       <ul class="flex justify-between relative rounded-full py-3 px-3">
-
-        <div
-            class="absolute bg-white/30 backdrop-blur-lg rounded-full transition-all duration-300 shadow-lg"
-            :style="indicatorStyle"
-        ></div>
 
         <li
             v-for="(link, index) in links"
@@ -14,7 +13,7 @@
             ref="linkRefs"
         >
           <NuxtLink :to="link.to" class="nav-link block relative z-10">
-            <component :is="link.icon" />
+            <component :is="link.icon"/>
           </NuxtLink>
         </li>
       </ul>
@@ -60,10 +59,10 @@ const updateIndicator = () => {
   const parentRect = active.parentElement!.getBoundingClientRect()
 
   indicatorStyle.value = {
-    left: `${rect.left - parentRect.left}px`,
-    width: `${rect.width}px`,
-    top: `${rect.top - parentRect.top}px`,
-    height: `${rect.height}px`,
+    left: `${ rect.left - parentRect.left }px`,
+    width: `${ rect.width }px`,
+    top: `${ rect.top - parentRect.top }px`,
+    height: `${ rect.height }px`,
     opacity: '1',
   }
 }

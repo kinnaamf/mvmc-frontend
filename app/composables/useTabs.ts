@@ -6,7 +6,7 @@ export const useTabs = () => {
     const base = isFavorites ? '/favorites' : ''
     return [
       { label: 'Подписки', to: `${base}/subscriptions` },
-      { label: 'Товары', to: `${base}/items` },
+      { label: 'Товары', to: `${base}/products` },
     ]
   })
 }

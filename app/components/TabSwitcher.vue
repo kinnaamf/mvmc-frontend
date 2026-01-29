@@ -41,7 +41,7 @@ onMounted(() => {
 })
 
 watch(() => route.path, () => {
-  route.path.includes('items') ? indicatorStyle.value.left = '110px' : indicatorStyle.value.left = '-40px'
+  route.path.includes('products') ? indicatorStyle.value.left = '110px' : indicatorStyle.value.left = '-40px'
 })
 </script>
 

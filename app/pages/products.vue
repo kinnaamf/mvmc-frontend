@@ -1,5 +1,5 @@
 <template>
-  <ItemList :items="items"></ItemList>
+  <ProductList :items="items"></ProductList>
 </template>
 
 <script setup lang="ts">
