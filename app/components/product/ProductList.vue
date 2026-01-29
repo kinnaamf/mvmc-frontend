@@ -2,25 +2,25 @@
   <div class="pb-28">
     <div class="grid grid-cols-2 gap-4">
       <ProductItem
-          v-for="item in items"
-          :key="item.id"
-          :item="item"
-          @click="openPopup(item)"
+          v-for="product in products"
+          :key="product.id"
+          :product="product"
+          @click="openPopup(product)"
       />
     </div>
 
     <Teleport to="#teleports">
       <div
-          v-show="selectedItem"
+          v-show="selectedProduct"
           id="shadow"
           class="popup-shadow px-6"
-          @click.self="selectedItem = null"
+          @click.self="selectedProduct = null"
       >
         <Transition name="slide-up">
           <ProductPopup
-              v-if="selectedItem"
-              :selected-item="selectedItem"
-              @close="selectedItem = null"
+              v-if="selectedProduct"
+              :selected-product="selectedProduct"
+              @close="selectedProduct = null"
               class="backdrop-blur-sm z-[100]"
           />
         </Transition>
@@ -31,17 +31,17 @@
 </template>
 
 <script setup lang="ts">
-import type { Item } from '~/types/item';
+import type { Product } from '~/types/product';
 import ProductPopup from "~/components/product/ProductPopup.vue";
 
 defineProps<{
-  items: Item[];
+  product: Product[];
 }>()
 
-const selectedItem = ref<Item | null>(null);
+const selectedProduct = ref<Product | null>(null);
 
-const openPopup = (item: Item) => {
-  selectedItem.value = item;
+const openPopup = (product: Product) => {
+  selectedProduct.value = product;
 }
 </script>
 

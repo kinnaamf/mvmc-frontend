@@ -8,17 +8,17 @@
         <div class="flex gap-4">
 
           <img
-              :src="selectedItem.avatar_url"
+              :src="selectedProduct.avatar_url"
               alt=""
               class="w-16 h-16 rounded-2xl">
 
           <div class="flex flex-col">
-            <span class="text-xl font-bold line-clamp-1">{{ selectedItem.title }}</span>
-            <span>{{ selectedItem.username }}</span></div>
+            <span class="text-xl font-bold line-clamp-1">{{ selectedProduct.title }}</span>
+            <span>{{ selectedProduct.username }}</span></div>
 
         </div>
         <div class="text-container">
-          <span>{{ selectedItem.description }}</span>
+          <span>{{ selectedProduct.description }}</span>
         </div>
         <div>
           <div class="audio-container">
@@ -44,7 +44,7 @@
             <a href="#" @click.prevent class="font-bold button-container p-3 w-full text-center">
               <span>Купить</span>
               <span class="ml-3 mr-3">|</span>
-              <span>{{ selectedItem.price }}₽</span>
+              <span>{{ selectedProduct.price }}₽</span>
             </a>
           <div @click="$emit('close')" class="button-container p-3">
             <a href="#"
@@ -58,13 +58,13 @@
 </template>
 
 <script setup lang="ts">
-import type { Item } from "~/types/item";
+import type { Product } from "~/types/product";
 import IconPlay from "~/components/icons/IconPlay.vue";
 import IconCross from "~/components/icons/IconCross.vue";
 import IconStop from "~/components/icons/IconStop.vue";
 
 defineProps<{
-  selectedItem: Item;
+  selectedProduct: Product;
 }>()
 
 defineEmits<{

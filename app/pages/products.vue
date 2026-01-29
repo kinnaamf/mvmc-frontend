@@ -1,5 +1,5 @@
 <template>
-  <ProductList :items="items"></ProductList>
+  <ProductList :products="products"></ProductList>
 </template>
 
 <script setup lang="ts">
@@ -7,9 +7,9 @@ definePageMeta({
   layout: 'tabs'
 })
 
-const { items, loading, getItems } = useItems()
+const { products, loading, getProducts } = useProducts()
 
 onMounted(async () => {
-  await getItems()
+  await getProducts()
 })
 </script>
