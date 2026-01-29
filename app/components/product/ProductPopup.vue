@@ -103,6 +103,8 @@ const formatTime = (time: Number) => {
 }
 
 onMounted(() => {
+  document.body.style.overflow = "hidden"
+
   if (!audio.value) return
 
   audio.value.onloadedmetadata = () => {
@@ -120,6 +122,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
+  document.body.style.overflow = ""
   audio.value?.pause()
 })
 </script>
