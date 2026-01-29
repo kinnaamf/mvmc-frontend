@@ -35,7 +35,7 @@ import type { Product } from '~/types/product';
 import ProductPopup from "~/components/product/ProductPopup.vue";
 
 defineProps<{
-  product: Product[];
+  products: Product[];
 }>()
 
 const selectedProduct = ref<Product | null>(null);
