@@ -164,36 +164,38 @@ onBeforeUnmount(() => {
 }
 
 input[type="range"] {
-  @apply w-full outline-none rounded-full bg-white/50 appearance-none;
+  @apply w-full outline-none rounded-full bg-transparent appearance-none;
 
   height: 4px;
   -webkit-appearance: none;
   -webkit-tap-highlight-color: transparent;
   tap-highlight-color: transparent;
+
+  padding: 24px 0;
+  margin: -24px 0;
 }
 
 input[type="range"]::-webkit-slider-thumb {
-  @apply rounded-full backdrop-blur-sm;
+  @apply rounded-full;
 
-  -webkit-appearance: none;
   appearance: none;
-  width: 24px;
+  width: 5px;
   height: 24px;
-  border: none;
   background: radial-gradient(
       circle at top,
-      rgba(0, 0, 0, 0.9),
-      rgba(0, 0, 0, 0.1) 40%,
-      rgba(0, 0, 0, 0.1) 60%,
-      rgba(0, 0, 0, 0.05)
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0.1) 40%,
+      rgba(255, 255, 255, 0.1) 60%,
+      rgba(255, 255, 255, 0.05)
   );
-  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.2),
-  inset 0 -3px 6px rgba(0, 0, 0, 0.4),
-  0 6px 16px rgba(0, 0, 0, 0.6);
+  box-shadow:
+      inset 0 2px 4px rgba(255, 255, 255, 0.5),
+      inset 0 -3px 6px rgba(0, 0, 0, 0.5),
+      0 6px 16px rgba(0, 0, 0, 0.5);
   cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
   margin-top: -10px;
 }
+
 
 input[type="range"]::-webkit-slider-runnable-track {
   -webkit-appearance: none;
