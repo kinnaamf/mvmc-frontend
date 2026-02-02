@@ -1,8 +1,9 @@
 <template>
-  <div class="flex justify-center mt-10 mb-16">
-    <div class="py-5 px-12 pr-14 bg-neutral-700/10 border border-neutral-500/10 rounded-full">
-      <div ref="containerRef" class="relative flex gap-20">
+  <div class="flex justify-center mt-10 mb-24">
 
+    <div class="py-5 px-12 pr-14 bg-neutral-700/10 border border-neutral-500/10 rounded-full">
+
+      <div ref="containerRef" class="relative flex gap-20">
         <div class="active-indicator" :style="indicatorStyle"></div>
 
         <NuxtLink
@@ -30,9 +31,9 @@ const props = defineProps<{
 
 const containerRef = ref<HTMLElement>()
 
-const indicatorStyle = ref({ left: '-40px' })
+const indicatorStyle = ref({ left: '-40px', })
 
-const updateIndicator = () => {
+const updateIndicatorStyle = () => {
   indicatorStyle.value.left = route.path.includes('products') ? '110px' : '-40px'
 }
 
@@ -40,27 +41,27 @@ onMounted(() => {
   if (!import.meta.client) return
   if (!containerRef.value) return
 
-  updateIndicator()
+  updateIndicatorStyle()
 
   setTimeout(() => {
   }, 1)
 })
 
 watch(() => route.path, () => {
-  updateIndicator()
-}, {immediate: true})
+  updateIndicatorStyle()
+}, { immediate: true })
 </script>
 
 <style scoped lang="postcss">
 .tab-link {
-  @apply w-max font-medium;
+  @apply w-max
 }
 
 .active-indicator {
   @apply absolute w-[9.375rem] h-[3.125rem] pointer-events-none top-1/2 -translate-y-1/2 transition-all duration-300 -z-10 rounded-full bg-white/5;
   box-shadow: 0 0 30px 1px rgba(0, 0, 0, 0.25) inset;
-  border: 1px solid rgba(255,255,255,0.13);
-  border-top-color: rgba(255,255,255,0.15);
-  border-left-color: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-top-color: rgba(255, 255, 255, 0.15);
+  border-left-color: rgba(255, 255, 255, 0.18);
 }
 </style>
