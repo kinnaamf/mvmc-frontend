@@ -1,18 +1,20 @@
 <template>
   <div class="flex justify-center mt-10 mb-16">
-    <div ref="containerRef" class="relative flex gap-20">
+    <div class="py-5 px-12 pr-14 bg-neutral-700/10 border border-neutral-500/10 rounded-full">
+      <div ref="containerRef" class="relative flex gap-20">
 
-      <div class="active-indicator" :style="indicatorStyle"></div>
+        <div class="active-indicator" :style="indicatorStyle"></div>
 
-      <NuxtLink
-          v-for="tab in tabs"
-          :key="tab.to"
-          :to="tab.to"
-          class="tab-link"
-          active-class="tab-link-active"
-      >
-        {{ tab.label }}
-      </NuxtLink>
+        <NuxtLink
+            v-for="tab in tabs"
+            :key="tab.to"
+            :to="tab.to"
+            class="tab-link"
+            active-class="tab-link-active"
+        >
+          {{ tab.label }}
+        </NuxtLink>
+      </div>
     </div>
   </div>
 </template>
@@ -28,26 +30,30 @@ const props = defineProps<{
 
 const containerRef = ref<HTMLElement>()
 
-const indicatorStyle = ref({
-  left: '-40px',
-})
+const indicatorStyle = ref({ left: '-40px' })
+
+const updateIndicator = () => {
+  indicatorStyle.value.left = route.path.includes('products') ? '110px' : '-40px'
+}
 
 onMounted(() => {
   if (!import.meta.client) return
   if (!containerRef.value) return
+
+  updateIndicator()
 
   setTimeout(() => {
   }, 1)
 })
 
 watch(() => route.path, () => {
-  route.path.includes('products') ? indicatorStyle.value.left = '110px' : indicatorStyle.value.left = '-40px'
-})
+  updateIndicator()
+}, {immediate: true})
 </script>
 
 <style scoped lang="postcss">
 .tab-link {
-  @apply w-max
+  @apply w-max font-medium;
 }
 
 .active-indicator {

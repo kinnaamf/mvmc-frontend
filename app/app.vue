@@ -27,6 +27,15 @@ useHead({
 
 const route = useRoute()
 
+const { init, isReady, validate } = useTelegram()
+
+onMounted(async () => {
+  await init()
+  if (isReady.value) {
+    await validate()
+  }
+})
+
 const showLogo = computed(() => {
   return !route.path.includes('favorites')
 })

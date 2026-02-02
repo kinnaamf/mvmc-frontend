@@ -1,60 +1,56 @@
 <template>
-    <div
-        class="popup-container px-10 py-8 z-10"
-        @click.stop>
+  <div
+      class="popup-container px-10 py-8 z-10"
+      @click.stop>
 
 
-      <div class="flex flex-col gap-10">
-        <div class="flex gap-4">
+    <div class="flex flex-col gap-10">
+      <div class="flex gap-4">
 
-          <img
-              :src="selectedProduct.avatar_url"
-              alt=""
-              class="w-16 h-16 rounded-2xl">
+        <img
+            :src="selectedProduct.avatar_url"
+            alt=""
+            class="w-16 h-16 rounded-2xl">
 
-          <div class="flex flex-col">
-            <span class="text-xl font-bold line-clamp-1">{{ selectedProduct.title }}</span>
-            <span>{{ selectedProduct.username }}</span></div>
+        <div class="flex flex-col">
+          <span class="text-xl font-bold line-clamp-1">{{ selectedProduct.title }}</span>
+          <span>{{ selectedProduct.username }}</span></div>
 
-        </div>
-        <div class="text-container">
-          <span>{{ selectedProduct.description }}</span>
-        </div>
-        <div>
-          <div class="audio-container">
-            <div class="flex items-center">
-              <input
-                  type="range"
-                  min="0"
-                  :max="duration"
-                  step="0.01"
-                  v-model="currentTime"
-                  class="w-full"
-                  @input="seek"
-              >
-              <a href="#" @click.prevent class="button-play" @click="toggle">
-                <IconPlay v-if="!isPlaying"/>
-                <IconStop v-if="isPlaying"/>
-              </a>
-            </div>
-            <audio ref="audio" src="/BAK.wav" preload="metadata"></audio>
+      </div>
+      <div class="text-container">
+        <span>{{ selectedProduct.description }}</span>
+      </div>
+      <div>
+        <div class="audio-container">
+          <div class="flex items-center">
+            <input
+                type="range"
+                min="0"
+                :max="duration"
+                step="0.01"
+                v-model="currentTime"
+                class="w-full"
+                @input="seek"
+            > <a href="#" @click.prevent class="button-play" @click="toggle">
+            <IconPlay v-if="!isPlaying"/>
+            <IconStop v-if="isPlaying"/>
+          </a>
           </div>
+          <audio ref="audio" src="/BAK.wav" preload="metadata"></audio>
         </div>
-        <div class="flex items-center justify-between gap-4">
-            <a href="#" @click.prevent class="font-bold button-container p-3 w-full text-center">
-              <span>Купить</span>
-              <span class="ml-3 mr-3">|</span>
-              <span>{{ selectedProduct.price }}₽</span>
-            </a>
-          <div @click="$emit('close')" class="button-container p-3">
-            <a href="#"
-               @click.prevent>
-              <IconCross/>
-            </a>
-          </div>
+      </div>
+      <div class="flex items-center justify-between gap-4">
+        <a href="#" @click.prevent="purchaseProduct" class="font-bold button-container p-3 w-full text-center"> <span>Купить</span>
+          <span class="ml-3 mr-3">|</span> <span>{{ selectedProduct.price }}₽</span> </a>
+        <div @click="$emit('close')" class="button-container p-3">
+          <a href="#"
+             @click.prevent>
+            <IconCross/>
+          </a>
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -63,7 +59,7 @@ import IconPlay from "~/components/icons/IconPlay.vue";
 import IconCross from "~/components/icons/IconCross.vue";
 import IconStop from "~/components/icons/IconStop.vue";
 
-defineProps<{
+const props = defineProps<{
   selectedProduct: Product;
 }>()
 
@@ -75,6 +71,27 @@ const audio = ref<HTMLAudioElement | null>(null)
 const isPlaying = ref<boolean>(false)
 const currentTime = ref<number>(0)
 const duration = ref<number>(0)
+
+const api = useApi()
+const { userData } = useTelegram()
+
+const purchaseProduct = async () => {
+  try {
+    const response = await api('/api/v1/products/purchase', {
+      method: 'POST',
+      body: {
+        user_id: userData.value.id,
+        product_id: props.selectedProduct.id
+      },
+    })
+
+    window.location.href = response.redirect_url
+
+    console.log('success')
+  } catch (e) {
+    console.error(e)
+  }
+}
 
 const toggle = () => {
   if (!audio.value) return
@@ -191,10 +208,9 @@ input[type="range"]::-webkit-slider-thumb {
       rgba(255, 255, 255, 0.1) 60%,
       rgba(255, 255, 255, 0.05)
   );
-  box-shadow:
-      inset 0 2px 4px rgba(255, 255, 255, 0.5),
-      inset 0 -3px 6px rgba(0, 0, 0, 0.5),
-      0 6px 16px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.5),
+  inset 0 -3px 6px rgba(0, 0, 0, 0.5),
+  0 6px 16px rgba(0, 0, 0, 0.5);
   cursor: pointer;
   margin-top: -10px;
 }

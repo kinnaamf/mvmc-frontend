@@ -150,7 +150,6 @@ export const useTelegram = () => {
       await init()
     }
 
-    // Если инициализация не удалась
     if (!isReady.value) {
       loading.value = false
       return false

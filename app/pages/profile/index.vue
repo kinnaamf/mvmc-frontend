@@ -35,12 +35,7 @@
 </template>
 
 <script setup lang="ts">
-const { init, validate, isReady, error, loading, userData } = useTelegram()
+const { error, loading, userData } = useTelegram()
 
-onMounted(async () => {
-  await init()
-  if (isReady.value) {
-    await validate()
-  }
-})
+
 </script>
