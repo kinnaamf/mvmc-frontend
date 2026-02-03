@@ -7,7 +7,11 @@ export const useUserPurchases = () => {
 
   const api = useApi()
 
+  const isLoading = ref<boolean>(false);
+
   const purchaseProduct = async (userId, productId) => {
+   isLoading.value = true;
+
     try {
       const response = await api('/api/v1/products/purchase', {
         method: 'POST',
@@ -25,6 +29,8 @@ export const useUserPurchases = () => {
     } catch (e) {
       console.error(e)
       return { success: false, error: e }
+    } finally {
+      isLoading.value = false;
     }
   }
 
@@ -32,5 +38,6 @@ export const useUserPurchases = () => {
     purchasedProducts,
     purchasedSubscriptions,
     purchaseProduct,
+    isLoading,
   }
 }

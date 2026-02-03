@@ -40,8 +40,14 @@
         </div>
       </div>
       <div class="flex items-center justify-between gap-4">
-        <a href="#" @click.prevent="handlePurchase" class="font-bold button-container p-3 w-full text-center" style="opacity: 50%"> <span>Купить</span>
-          <span class="ml-3 mr-3">|</span> <span>{{ selectedProduct.price }}₽</span> </a>
+        <button
+            :class="buttonClasses"
+            :style="{ WebkitTapHighlightColor: 'transparent' }"
+            :disabled="isLoading"
+            @click.prevent="handlePurchase"
+            class="font-bold button-container p-3 w-full text-center"
+        > <span>Купить</span>
+          <span class="ml-3 mr-3">|</span> <span>{{ selectedProduct.price }}₽</span> </button>
         <div @click="$emit('close')" class="button-container p-3">
           <a href="#" @click.prevent>
             <IconCross/>
@@ -72,7 +78,15 @@ const currentTime = ref<number>(0)
 const duration = ref<number>(0)
 
 const { userData } = useTelegram()
-const { purchaseProduct } = useUserPurchases()
+const { purchaseProduct, isLoading } = useUserPurchases()
+
+const buttonClasses = computed(() => {
+  const baseClasses = 'transition-all duration-300 touch-manipulation'
+  const touchClasses = 'active:brightness-75'
+  const loadingClasses = 'opacity-50 pointer-events-none'
+
+  return isLoading.value ? `${baseClasses} ${loadingClasses}` : `${baseClasses} ${touchClasses}`
+})
 
 const handlePurchase = async () => {
   const result = await purchaseProduct(userData.value.id, props.selectedProduct.id)
