@@ -40,11 +40,10 @@
         </div>
       </div>
       <div class="flex items-center justify-between gap-4">
-        <a href="#" @click.prevent="purchaseProduct" class="font-bold button-container p-3 w-full text-center"> <span>Купить</span>
+        <a href="#" @click.prevent="handlePurchase" class="font-bold button-container p-3 w-full text-center" style="opacity: 50%"> <span>Купить</span>
           <span class="ml-3 mr-3">|</span> <span>{{ selectedProduct.price }}₽</span> </a>
         <div @click="$emit('close')" class="button-container p-3">
-          <a href="#"
-             @click.prevent>
+          <a href="#" @click.prevent>
             <IconCross/>
           </a>
         </div>
@@ -72,24 +71,14 @@ const isPlaying = ref<boolean>(false)
 const currentTime = ref<number>(0)
 const duration = ref<number>(0)
 
-const api = useApi()
 const { userData } = useTelegram()
+const { purchaseProduct } = useUserPurchases()
 
-const purchaseProduct = async () => {
-  try {
-    const response = await api('/api/v1/products/purchase', {
-      method: 'POST',
-      body: {
-        user_id: userData.value.id,
-        product_id: props.selectedProduct.id
-      },
-    })
+const handlePurchase = async () => {
+  const result = await purchaseProduct(userData.value.id, props.selectedProduct.id)
 
-    window.location.href = response.redirect_url
-
+  if (result.success) {
     console.log('success')
-  } catch (e) {
-    console.error(e)
   }
 }
 
