@@ -9,11 +9,11 @@ export const useUserPurchases = () => {
 
   const isLoading = ref<boolean>(false);
 
-  const purchaseProduct = async (userId, productId) => {
+  const purchaseProduct = async (userId: number, productId: number) => {
    isLoading.value = true;
 
     try {
-      const response = await api('/api/v1/products/purchase', {
+      const response = await api<any>('/api/v1/products/purchase', {
         method: 'POST',
         body: {
           user_id: userId,
