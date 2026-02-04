@@ -15,11 +15,11 @@
             :class="buttonClasses"
             :style="{ WebkitTapHighlightColor: 'transparent' }"
             :disabled="isLoading"
-            @click.prevent="handlePurchase"
+            @click.prevent="!selectedProduct.is_purchased ? handlePurchase : console.log(123123)"
             class="font-bold button-container p-3 w-full text-center"
         >
-          <span>{{ isLoading ? 'Обработка...' : `Купить   |   ${selectedProduct.price}₽` }}</span>
-
+          <span v-if="!selectedProduct.is_purchased">{{ isLoading ? 'Обработка...' : `Купить   |   ${selectedProduct.price}₽` }}</span>
+          <span v-else>Получить</span>
         </button>
         <button
             @click="$emit('close')"

@@ -1,5 +1,5 @@
 <template>
-  <ProductList :products="products"></ProductList>
+  <ProductList :products="products.filter(p => !p.is_purchased)"></ProductList>
 </template>
 
 <script setup lang="ts">

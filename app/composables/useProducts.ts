@@ -15,7 +15,10 @@ export const useProducts = () => {
     loading.value = true;
 
     try {
-      products.value = await api<Product[]>(`/api/v1/products?user_id=${userData.value.id}`)
+      const data = await api<Product[]>(`/api/v1/products?user_id=${userData.value.id}`)
+      if(Array.isArray(data)) {
+        products.value = data
+      }
     } catch (error) {
       loading.value = false;
       console.log(error)
