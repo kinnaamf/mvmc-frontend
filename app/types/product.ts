@@ -7,4 +7,5 @@ export interface Product {
   is_purchased: boolean;
   avatar_url: string;
   ring_color: string;
+  audio_url: string;
 }

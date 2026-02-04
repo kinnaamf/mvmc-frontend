@@ -4,6 +4,8 @@ export const useProducts = () => {
   const api = useApi();
 
   const products = useState<Product[]>('products', () => []);
+  const { userData } = useTelegram()
+
 
   const loading = ref<boolean>(false);
 
@@ -13,7 +15,7 @@ export const useProducts = () => {
     loading.value = true;
 
     try {
-      products.value = await api<Product[]>(`/api/v1/products`)
+      products.value = await api<Product[]>(`/api/v1/products?user_id=${userData.value.id}`)
     } catch (error) {
       loading.value = false;
       console.log(error)

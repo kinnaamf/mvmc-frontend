@@ -3,7 +3,6 @@
       class="popup-container px-10 py-8 z-10"
       @click.stop>
 
-
     <div class="flex flex-col gap-10">
       <ProductHeader :selected-product="selectedProduct"/>
 
@@ -70,10 +69,6 @@ const handlePurchase = async () => {
 </script>
 
 <style scoped lang="postcss">
-.popup-shadow {
-  @apply fixed w-screen h-screen bg-black/70 top-0 left-0 px-6 flex items-center z-50;
-}
-
 .popup-container {
   @apply bg-[#0A0A0A]/80 w-full;
 

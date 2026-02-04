@@ -9,17 +9,17 @@
           v-model="currentTime"
           class="w-full"
           @input="seek"
-      > <a href="#" @click.prevent class="button-play" @click="toggle">
-      <IconPlay v-if="!isPlaying"/>
-      <IconStop v-if="isPlaying"/>
-    </a>
+      >
+      <a href="#" @click.prevent class="button-play" @click="toggle">
+        <IconPlay v-if="!isPlaying"/>
+        <IconStop v-if="isPlaying"/>
+      </a>
     </div>
     <audio ref="audio" :src="audioSrc" preload="metadata"></audio>
   </div>
 </template>
 
 <script setup lang="ts">
-
 import IconPlay from "~/components/icons/IconPlay.vue";
 import IconStop from "~/components/icons/IconStop.vue";
 
