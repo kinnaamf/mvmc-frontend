@@ -16,7 +16,6 @@ definePageMeta({
   layout: 'tabs'
 })
 
-const { subscriptions } = useSubscriptions()
 const { purchasedSubscriptions, getSubscriptions } = useUserPurchases()
 
 onMounted(async () => {

@@ -15,7 +15,7 @@
             :class="buttonClasses"
             :style="{ WebkitTapHighlightColor: 'transparent' }"
             :disabled="isLoading"
-            @click.prevent="!selectedProduct.is_purchased ? handlePurchase : console.log(123123)"
+            @click.prevent="!selectedProduct.is_purchased ? handlePurchase() : console.log(123123)"
             class="font-bold button-container p-3 w-full text-center"
         >
           <span v-if="!selectedProduct.is_purchased">{{ isLoading ? 'Обработка...' : `Купить   |   ${selectedProduct.price}₽` }}</span>
@@ -59,6 +59,8 @@ const buttonClasses = computed(() => {
 
 const handlePurchase = async () => {
   const result = await purchaseProduct(userData.value.id, props.selectedProduct.id)
+
+  console.log(123);
 
   if (result.success) {
     console.log('success')

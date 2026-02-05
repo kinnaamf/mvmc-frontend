@@ -29,11 +29,17 @@ const route = useRoute()
 
 const { init, isReady, validate } = useTelegram()
 
+const { getProducts } = useProducts()
+const { getSubscriptions } = useSubscriptions()
+
 onMounted(async () => {
   await init()
   if (isReady.value) {
     await validate()
   }
+
+  await getProducts()
+  await getSubscriptions()
 })
 
 const showLogo = computed(() => {

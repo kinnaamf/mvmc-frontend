@@ -7,9 +7,5 @@ definePageMeta({
   layout: 'tabs'
 })
 
-const { products, loading, getProducts } = useProducts()
-
-onMounted(async () => {
-  await getProducts()
-})
+const { products, loading } = useProducts()
 </script>
