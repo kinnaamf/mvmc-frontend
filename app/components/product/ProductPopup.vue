@@ -60,8 +60,6 @@ const buttonClasses = computed(() => {
 const handlePurchase = async () => {
   const result = await purchaseProduct(userData.value.id, props.selectedProduct.id)
 
-  console.log(123);
-
   if (result.success) {
     console.log('success')
   }

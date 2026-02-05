@@ -31,7 +31,7 @@
             </div>
           </div>
         </div>
-        <div class="mt-6 text-center button-container py-3 w-full">
+        <div class="mt-6 text-center button-container py-3 w-full" @click="handlePurchase">
           <a @click.prevent @click.stop href="#" class="uppercase font-bold"> Подписаться </a>
         </div>
       </div>
@@ -45,9 +45,20 @@ import IconPlus from "~/components/icons/IconPlus.vue";
 
 const showContent = ref(false);
 
-defineProps<{
+const { userData } = useTelegram()
+const { purchaseSubscription } = useUserPurchases()
+
+const props = defineProps<{
   subscription: Subscription;
 }>()
+
+const handlePurchase = async () => {
+  const result = await purchaseSubscription(userData.value.id, props.subscription.id);
+
+  if (result.success) {
+    console.log('success');
+  }
+}
 </script>
 
 <style scoped lang="postcss">
