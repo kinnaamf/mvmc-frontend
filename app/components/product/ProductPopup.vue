@@ -35,9 +35,7 @@
 
 <script setup lang="ts">
 import type { Product } from "~/types/product";
-import IconPlay from "~/components/icons/IconPlay.vue";
 import IconCross from "~/components/icons/IconCross.vue";
-import IconStop from "~/components/icons/IconStop.vue";
 import ProductHeader from "~/components/product/ProductHeader.vue";
 
 const props = defineProps<{

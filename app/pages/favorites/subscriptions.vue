@@ -1,9 +1,10 @@
 <template>
   <PurchasedList
+      v-if="purchasedSubscriptions.length"
+      :subscriptions="purchasedSubscriptions"
+  />
 
-      :subscriptions="subscriptions.filter(s => s.is_purchased)"/>
-
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+  <div v-else class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
     <span class="text-white/80 font-medium text-base">Нет активных подписок</span>
   </div>
 </template>
@@ -16,7 +17,7 @@ definePageMeta({
 })
 
 const { subscriptions } = useSubscriptions()
-const { purchasedSubsriptions, getSubscriptions } = useUserPurchases()
+const { purchasedSubscriptions, getSubscriptions } = useUserPurchases()
 
 onMounted(async () => {
   await getSubscriptions()

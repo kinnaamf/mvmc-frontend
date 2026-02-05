@@ -2,9 +2,6 @@ import type { Product } from "~/types/product";
 import type { Subscription } from "~/types/subscription";
 
 export const useUserPurchases = () => {
-  const purchasedProducts = useState<Product[]>('purchasedProducts', () => []);
-  const purchasedSubscriptions = useState<Subscription[]>('purchasedSubscriptions', () => []);
-
   const { products, getProducts } = useProducts();
   const { subscriptions, getSubscriptions } = useSubscriptions();
 
@@ -63,8 +60,12 @@ export const useUserPurchases = () => {
     }
   }
 
-  purchasedSubscriptions.value = subscriptions.value.filter(s => s.is_purchased)
-  purchasedProducts.value = products.value.filter(p => p.is_purchased)
+  const purchasedSubscriptions = computed(() => {
+    return subscriptions.value.filter(s => s.is_purchased)
+  })
+  const purchasedProducts = computed(() => {
+    return products.value.filter(p => p.is_purchased)
+  })
 
   return {
     purchasedProducts,

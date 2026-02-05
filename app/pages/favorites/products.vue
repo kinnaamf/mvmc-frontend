@@ -3,7 +3,7 @@
     <span class="text-white/80 font-medium text-base">Нет купленных товаров</span>
   </div>
 
-  <ProductList :products="products.filter(p => p.is_purchased)"></ProductList>
+  <ProductList :products="purchasedProducts"></ProductList>
 </template>
 
 <script setup lang="ts">
@@ -12,7 +12,6 @@ definePageMeta({
 })
 
 const { purchasedProducts, getProducts, isLoading } = useUserPurchases()
-const { products } = useProducts()
 
 onMounted(async() => {
   await getProducts()
