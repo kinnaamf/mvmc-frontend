@@ -6,7 +6,6 @@ export const useProducts = () => {
   const products = useState<Product[]>('products', () => []);
   const { userData } = useTelegram()
 
-
   const loading = ref<boolean>(false);
 
   const getProducts = async() => {

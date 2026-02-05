@@ -6,19 +6,13 @@ export const useUserPurchases = () => {
   const purchasedSubscriptions = useState<Subscription[]>('purchasedSubscriptions', () => []);
 
   const { products, getProducts } = useProducts();
+  const { subscriptions, getSubscriptions } = useSubscriptions();
+
   const api = useApi()
   const isLoading = ref<boolean>(false);
 
-  const computedPurchasedProducts = computed(() => {
-    return products.value.filter(p => p.is_purchased)
-  })
-
-  watchEffect(() => {
-    purchasedProducts.value = computedPurchasedProducts.value
-  })
-
   const purchaseProduct = async (userId: number, productId: number) => {
-   isLoading.value = true;
+    isLoading.value = true;
 
     try {
       const response = await api<any>('/api/v1/products/purchase', {
@@ -35,21 +29,50 @@ export const useUserPurchases = () => {
 
       await getProducts()
 
-      return { success: true, data: response }
+      return {success: true, data: response}
     } catch (e) {
       console.error(e)
-      return { success: false, error: e }
+      return {success: false, error: e}
     } finally {
       isLoading.value = false;
     }
   }
 
+  const purchaseSubscription = async (userId: number, subscriptionId: number) => {
+    isLoading.value = true;
+
+    try {
+      const response = await api<any>('/api/v1/subscriptions/purchase', {
+        method: 'POST',
+        body: {
+          user_id: userId,
+          subscription_id: subscriptionId
+        }
+      })
+
+      if (response.redirect_url) {
+        window.location.href = response.redirect_url
+      }
+
+      return {success: true, data: response}
+    } catch (e) {
+      console.error(e)
+      return {success: false, error: e}
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  purchasedSubscriptions.value = subscriptions.value.filter(s => s.is_purchased)
+  purchasedProducts.value = products.value.filter(p => p.is_purchased)
 
   return {
     purchasedProducts,
     purchasedSubscriptions,
     purchaseProduct,
+    purchaseSubscription,
     isLoading,
     getProducts,
+    getSubscriptions
   }
 }
