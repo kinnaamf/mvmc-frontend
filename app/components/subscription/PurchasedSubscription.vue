@@ -31,9 +31,12 @@
             </div>
           </div>
         </div>
-        <div class="mt-6 text-center button-container py-3 w-full">
-          <a @click.prevent @click.stop href="#" class="uppercase font-bold"> Подписаться </a>
-        </div>
+        <button
+            @click.prevent @click.stop class="mt-6 button-container uppercase font-bold h-full w-full py-3 text-center"
+            :style="{ WebkitTapHighlightColor: 'transparent' }"
+        >
+          Получить ссылку
+        </button>
       </div>
     </div>
   </div>

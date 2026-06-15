@@ -8,7 +8,8 @@
 
       <span class="text-container">{{ selectedProduct.description }}</span>
 
-      <ProductAudio :audio-src="selectedProduct.audio_url || '/BAK.wav'"/>
+      <ProductAudio :audio-src="'/BAK.wav'"/>
+<!--      <ProductAudio :audio-src="selectedProduct.audio_url || '/BAK.wav'"/>-->
 
       <div class="flex items-center justify-between gap-4">
         <button

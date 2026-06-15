@@ -31,8 +31,16 @@
             </div>
           </div>
         </div>
-        <div class="mt-6 text-center button-container py-3 w-full" @click="handlePurchase">
-          <a @click.prevent @click.stop href="#" class="uppercase font-bold"> Подписаться </a>
+        <div
+            :class="buttonClasses"
+            class="mt-6 button-container w-full" @click="!subscription.is_purchased ? handlePurchase() : console.log(subscription)">
+          <button
+              @click.prevent @click.stop class="uppercase font-bold h-full w-full py-3 text-center"
+              :style="{ WebkitTapHighlightColor: 'transparent' }"
+              :disabled="isLoading"
+          >
+            {{ !subscription.is_purchased ? 'Подписаться' : 'Получить' }}
+          </button>
         </div>
       </div>
     </div>
@@ -43,14 +51,23 @@
 import type { Subscription } from "~/types/subscription";
 import IconPlus from "~/components/icons/IconPlus.vue";
 
-const showContent = ref(false);
-
-const { userData } = useTelegram()
-const { purchaseSubscription } = useUserPurchases()
-
 const props = defineProps<{
   subscription: Subscription;
 }>()
+
+const showContent = ref(false);
+
+const { userData } = useTelegram()
+const { purchaseSubscription, isLoading } = useUserPurchases()
+
+const buttonClasses = computed(() => {
+  const baseClasses = 'transition-all duration-300 touch-manipulation'
+  const touchClasses = 'active:brightness-75'
+  const loadingClasses = 'opacity-50 pointer-events-none'
+
+  return isLoading.value ? `${ baseClasses } ${ loadingClasses }` : `${ baseClasses } ${ touchClasses }`
+})
+
 
 const handlePurchase = async () => {
   const result = await purchaseSubscription(userData.value.id, props.subscription.id);
