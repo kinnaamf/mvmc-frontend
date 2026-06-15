@@ -1,75 +1,25 @@
-# Nuxt Minimal Starter
+# MVMC Frontend
+## Telegram Mini App | Beatmaker Marketplace & Subscriptions
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A high-performance, interactive Telegram Mini App designed for beatmakers 
+and sound designers. Built with Nuxt 3, Tailwind CSS, and TypeScript, it offers a 
+sleek marketplace experience for selling drum kits, sample packs, and premium subscriptions.
 
-## Setup
+**Live Demo:** https://mvmc-frontend.duckdns.org/
 
-Make sure to install dependencies:
+> **Note:** The backend is currently offline. The app operates entirely on high-fidelity 
+> mock data with artificial network delays to showcase loading states and animations.
 
-```bash
-# npm
+## Quick Start
+### Clone the project
+```
+git clone https://github.com/kinnaamf/mvmc-frontend
+```
+### Install dependencies
+```
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
+### Start development server
+```
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
